@@ -1029,6 +1029,7 @@ namespace TGC.Group.Model
 
         public override void Update()
         {
+            PreUpdate();
             timerBlast += ElapsedTime;
             if (!gui_mode)
             {
@@ -1214,8 +1215,8 @@ namespace TGC.Group.Model
                 }
                 else
                 {
-                    float dx = Input.XposRelative * 0.25f;
-                    float dy = Input.YposRelative * 0.25f;
+                    float dx = Input.XposRelative;// * 0.25f;
+                    float dy = Input.YposRelative;// * 0.25f;
 
                     if (curr_mode == defines.MODO_GAME)
                     {
@@ -1230,10 +1231,10 @@ namespace TGC.Group.Model
                         ship_vel.TransformNormal(rotN);
                         ship_bitan.TransformNormal(rotN);
                         if (!Input.keyDown(Microsoft.DirectX.DirectInput.Key.LeftShift)) dx *= 0.3f;
-                        ship_an += ElapsedTime * dx; // * 15.0f;
+                        ship_an += ElapsedTime * dx * 0.15f; 
                         ship_an = FastMath.Clamp(ship_an, -1, 1);
                         if (!Input.keyDown(Microsoft.DirectX.DirectInput.Key.LeftShift)) dy *= 0.5f;
-                        ship_anV += ElapsedTime * dy * 15; // * 5.0f;
+                        ship_anV += ElapsedTime * dy * 0.00015f; 
                         ship_anV = FastMath.Clamp(ship_anV, -1, 1);
 
                         Matrix rotBT = Matrix.RotationAxis(ship_bitan, -ElapsedTime * dy);
@@ -1425,6 +1426,7 @@ namespace TGC.Group.Model
                 Vector3 cam_N = ship_pos;
                 cam_N.Normalize();
                 Camara.SetCamera(desired_LF, desired_LA, cam_N);
+                
                 UpdateView();
 
             }

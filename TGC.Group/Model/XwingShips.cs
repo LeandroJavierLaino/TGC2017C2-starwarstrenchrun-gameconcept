@@ -18,7 +18,7 @@ namespace TGC.Group.Model
             
             foreach (var part in xwing)
             {
-                part.Position = part.Position + positionhay;
+                part.Position = part.Position + position;
             }
         }
 
